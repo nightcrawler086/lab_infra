@@ -13,8 +13,13 @@ spec:
         app: auth
     spec:
       containers:
+<<<<<<< Updated upstream
       - name: auth
         image: nightcrawler086/auth
+=======
+        - name: auth
+          image: localhost:5000/auth
+>>>>>>> Stashed changes
 ---
 apiVersion: v1
 kind: Service
