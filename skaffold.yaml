@@ -8,11 +8,7 @@ build:
   local:
     push: false
   artifacts:
-<<<<<<< Updated upstream
     - image: nightcrawler086/auth
-=======
-    - image: localhost:5000/auth
->>>>>>> Stashed changes
       context: auth
       docker:
         dockerfile: Dockerfile
