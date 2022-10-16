@@ -8,10 +8,10 @@ build:
   local:
     push: false
   artifacts:
-    - image: nighcrawler086/auth
+    - image: nightcrawler086/auth
       context: auth
       docker:
-        dockerfile: 
+        dockerfile: Dockerfile
       sync:
         manual:
           - src: 'src/**/*.ts'
