@@ -9,4 +9,9 @@ export class AppController {
   getHello(): string {
     return this.appService.getHello();
   }
+
+  @Get('/api/users/currentuser')
+  getUsers(): string {
+    return this.appService.getUsers();
+  }
 }
