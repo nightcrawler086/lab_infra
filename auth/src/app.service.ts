@@ -8,4 +8,13 @@ export class AppService {
   getUsers(): string {
     return 'The users should be here';
   }
+  userSignin(): string {
+    return 'The users signin be here';
+  }
+  userSignup(): string {
+    return 'The users signup be here';
+  }
+  userSignout(): string {
+    return 'The users signout be here';
+  }
 }
