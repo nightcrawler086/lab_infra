@@ -1,6 +1,7 @@
-import { Controller, Get, Post, Request } from '@nestjs/common';
+import { Controller, Get, Post, Request, Body } from '@nestjs/common';
 import { request } from 'express';
 import { AppService } from './app.service';
+import { userSignupDTO } from "./dto/userSignup.dto";
 
 @Controller()
 export class AppController {
@@ -17,9 +18,10 @@ export class AppController {
   }
 
   @Post('/api/users/signup')
-  userSignup(): string {
-    const { email, password } = request.body;
-    return this.appService.userSignup();
+  userSignup(@Body() body: userSignupDTO) {
+    let data = body as userSignupDTO;
+    return JSON.stringify(data);
+    //return this.appService.userSignup();
     // new user({ email, password})
   }
 
