@@ -18,8 +18,9 @@ export class AppController {
   }
 
   @Post('/api/users/signup')
-  userSignup(@Body() body: userSignupDTO) {
+  async userSignup(@Body() body: userSignupDTO) {
     let data = body as userSignupDTO;
+    console.log(`Creating a new user with email ${data.email} and a passowrd of ${data.password}`)
     return JSON.stringify(data);
     //return this.appService.userSignup();
     // new user({ email, password})
