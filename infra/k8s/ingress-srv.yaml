@@ -12,10 +12,18 @@ spec:
   - host: lab-infra.dev
     http:
       paths:
-        - path: /api/users
+        - path: /api
           pathType: Prefix
           backend:  
             service:
               name: auth-srv
               port:
                 number: 3000
+
+        #- path: /api/users
+        #  pathType: Prefix
+        #  backend:  
+        #    service:
+        #      name: auth-srv
+        #      port:
+        #        number: 3000
