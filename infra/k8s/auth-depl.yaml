@@ -2,6 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: auth-depl
+  labels:
+    app: auth
 spec:
   replicas: 1
   selector:
@@ -13,8 +15,8 @@ spec:
         app: auth
     spec:
       containers:
-        - name: auth
-          image: nightcrawler086/auth
+      - name: auth
+        image: nightcrawler086/auth
 ---
 apiVersion: v1
 kind: Service
@@ -24,7 +26,7 @@ spec:
   selector:
     app: auth
   ports:
-    - name: auth
-      protocol: TCP
-      port: 3000
-      targetPort: 3000
+  - name: auth
+    protocol: TCP
+    port: 3000
+    targetPort: 3000
