@@ -8,7 +8,8 @@ import { User } from './entities/user.entity'
 
 @Module({
   // Using TypeORM for the DB connection
-  imports: [TypeOrmModule.forRoot({
+  imports: [
+    TypeOrmModule.forRoot({
     type: 'mongodb',
     host: 'auth-mongo-srv',
     port: 27017,
