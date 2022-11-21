@@ -1,20 +1,28 @@
 import { Injectable } from '@nestjs/common';
+import { Repository } from 'typeorm';
+import { InjectRepository } from '@nestjs/typeorm'
+import { User } from './entities/user.entity'
 
 @Injectable()
 export class AppService {
+constructor(@InjectRepository(User) private repo: Repository<User>) {}
+  create(email: string, password: string) {
+    const user = this.repo.create({ email, password })
+    return this.repo.save(user)
+  }
   getHello(): string {
-    return 'Hello from minikube!';
+    return 'Hello';
   }
   getUsers(): string {
-    return 'The users should be here';
+    return 'This is where we get our users from';
   }
   userSignin(): string {
-    return 'The users signin be here';
+    return 'sing in the users here';
   }
   userSignup(): string {
-    return 'The users signup be here';
+    return 'sing up the users here';
   }
   userSignout(): string {
-    return 'The users signout be here';
+    return 'Sign out the users here';
   }
 }

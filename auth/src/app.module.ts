@@ -1,13 +1,13 @@
 import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './entities/user.entity'
 //import { MongooseModule } from '@nestjs/mongoose';
 //import { mongo } from 'mongoose';
 
 @Module({
-  // Using TypeORM for the DB connection
+  // This creates the connection to the DB
   imports: [
     TypeOrmModule.forRoot({
     type: 'mongodb',
@@ -17,7 +17,10 @@ import { User } from './entities/user.entity'
     entities: [User],
     synchronize: true,
     useUnifiedTopology: true
-  })
+  }),
+    // This seems to create the repo in mongodb
+    TypeOrmModule.forFeature([User])
+    // Following two use MongooseModule instead of TypeORM
     // Using one for testing and one for our users
     //MongooseModule.forRootAsync({
     //  useFactory: async () => ({

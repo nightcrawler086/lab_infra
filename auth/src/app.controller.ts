@@ -1,11 +1,10 @@
 import { Controller, Get, Post, Request, Body } from '@nestjs/common';
-import { request } from 'express';
 import { AppService } from './app.service';
 import { userSignupDTO } from "./dto/userSignup.dto";
 
 @Controller('api/auth')
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private appService: AppService) {}
 
   @Get()
   getHello(): string {
@@ -18,13 +17,16 @@ export class AppController {
   }
 
   @Post('signup')
-  async userSignup(@Body() body: userSignupDTO) {
-    let data = body as userSignupDTO;
-    console.log(`Creating a new user with email ${data.email} and a passowrd of ${data.password}`)
-    return JSON.stringify(data);
-    //return this.appService.userSignup();
-    // new user({ email, password})
+  createUser(@Body() body: userSignupDTO) {
+    this.appService.create(body.email, body.password);
   }
+  //async userSignup(@Body() body: userSignupDTO) {
+  //  let data = body as userSignupDTO;
+  //  console.log(`Creating a new user with email ${data.email} and a passowrd of ${data.password}`)
+  //  return JSON.stringify(data);
+  //  //return this.appService.userSignup();
+  //  // new user({ email, password})
+  //}
 
   @Post('signin')
   userSignin(): string {
