@@ -3,7 +3,7 @@ import { request } from 'express';
 import { AppService } from './app.service';
 import { userSignupDTO } from "./dto/userSignup.dto";
 
-@Controller()
+@Controller('api/auth')
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
@@ -12,12 +12,12 @@ export class AppController {
     return this.appService.getHello();
   }
 
-  @Get('/api/users/currentuser')
+  @Get('currentuser')
   getUsers(): string {
     return this.appService.getUsers();
   }
 
-  @Post('/api/users/signup')
+  @Post('signup')
   async userSignup(@Body() body: userSignupDTO) {
     let data = body as userSignupDTO;
     console.log(`Creating a new user with email ${data.email} and a passowrd of ${data.password}`)
@@ -26,12 +26,12 @@ export class AppController {
     // new user({ email, password})
   }
 
-  @Post('/api/users/signin')
+  @Post('signin')
   userSignin(): string {
     return this.appService.userSignin();
   }
 
-  @Post('/api/users/signout')
+  @Post('signout')
   userSignout(): string {
     return this.appService.userSignout();
   }
