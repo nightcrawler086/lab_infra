@@ -7,6 +7,7 @@ import { User } from './entities/user.entity'
 //import { mongo } from 'mongoose';
 
 @Module({
+  // Using TypeORM for the DB connection
   imports: [TypeOrmModule.forRoot({
     type: 'mongodb',
     host: 'auth-mongo-srv',
