@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Request, Body } from '@nestjs/common';
+import { Controller, Get, Post, Request, Body, Patch, Param, Query, Delete } from '@nestjs/common';
 import { AppService } from './app.service';
 import { userSignupDTO } from "./dto/userSignup.dto";
 
@@ -11,10 +11,16 @@ export class AppController {
     return this.appService.getHello();
   }
 
-  @Get('currentuser')
-  getUsers(): string {
-    return this.appService.getUsers();
+  // request doesn't fail, but doesn't return anything
+  @Get('user/:id')
+  findUser(@Param('id') id: string ) {
+    return this.appService.findOne(parseInt(id));
   }
+
+  //@Delete('user/:id') 
+  //removeUser(@Param('id') id: string ) {
+  //  return this.appService.remove(parseInt(id))
+  //}
 
   @Post('signup')
   createUser(@Body() body: userSignupDTO) {
