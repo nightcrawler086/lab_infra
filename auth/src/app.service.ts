@@ -8,7 +8,8 @@ import { User } from './entities/user.entity'
   constructor(@InjectRepository(User) private repo: Repository<User>) {}
   create(email: string, password: string) {
     const user = this.repo.create({ email, password })
-    console.log(`Creating user:  email=${email}, password=${password}`)
+    // Using AfterInsert() in Entity class
+    //console.log(`Creating user:  email=${email}, password=${password}`)
     return this.repo.save(user)
   }
   getHello(): string {
