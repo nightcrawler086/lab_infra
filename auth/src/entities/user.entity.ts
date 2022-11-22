@@ -1,8 +1,9 @@
-import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, ObjectIdColumn } from "typeorm";
 
 @Entity()
 export class User {
-    @PrimaryGeneratedColumn()
+    // Mongo needs ObjectIdColumn instead of PrimaryGeneratedColumn
+    @ObjectIdColumn()
     id: number;
 
     @Column()
