@@ -1,11 +1,12 @@
 import { Injectable } from "@nestjs/common";
-import { MongooseModuleOptions, MongooseOptionsFactory } from "@nestjs/mongoose";
+import { TypeOrmModuleOptions, TypeOrmOptionsFactory } from "@nestjs/typeorm";
 import { User } from '../entities/user.entity'
 
 Injectable()
-export class MongooseConfigService implements MongooseOptionsFactory {
-    createMongooseOptions(): MongooseModuleOptions {
+export class TypeOrmConfigService implements TypeOrmOptionsFactory {
+    createTypeOrmOptions(connectionName: 'mongo'): TypeOrmModuleOptions {
         return {
+            type: 'mongodb',
             host: 'auth-mongo-srv',
             port: 27017,
             database: 'auth',
