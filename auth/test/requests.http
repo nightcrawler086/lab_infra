@@ -1,3 +1,4 @@
+### A POST to the signup bit
 POST https://lab-infra.dev/api/auth/signup
 content-type: application/json
 
@@ -5,3 +6,11 @@ content-type: application/json
     "email": "test@test.com",
     "password": "password"
 }
+
+### Let's try to retrieve all users by email
+
+GET http://lab-infra.dev/api/auth?email=test@test.com
+
+
+### Remove a user by email address
+DELETE http://lab-infra.dev/api/auth?email=test@test.com
