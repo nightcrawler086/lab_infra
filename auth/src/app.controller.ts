@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Request, Body, Patch, Param, Query, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Request, Body, Patch, Param, Query, Delete, NotFoundException } from '@nestjs/common';
 import { AppService } from './app.service';
 import { userSignupDTO } from "./dto/userSignup.dto";
 
@@ -14,13 +14,17 @@ export class AppController {
 
   // request doesn't fail, but doesn't return anything
   @Get('user/:id')
-  findUser(@Param('id') id: string ) {
-    return this.appService.findOne(id);
+  async findUser(@Param('id') id: string ) {
+    const user = await this.appService.findOne(id);
+    if (!user) {
+      throw new NotFoundException('user not found')
+    }
+    return user
   }
 
-  @Delete() 
-  removeUser(@Query('email') email: string ) {
-    return this.appService.remove(email)
+  @Delete('user/:id') 
+  removeUser(@Param('id') userId: string ) {
+    return this.appService.remove(userId)
   }
 
   @Post('signup')
