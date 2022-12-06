@@ -11,6 +11,12 @@ content-type: application/json
 
 GET http://lab-infra.dev/api/auth?email=test@test.com
 
+### Get User by ID
+GET http://lab-infra.dev/api/auth/user/aac89037-eb4f-438c-8bad-a9304c03affe
+
+
+### Delete User by ID
+DELETE  http://lab-infra.dev/api/auth/user/aac89037-eb4f-438c-8bad-a9304c03affe
 
 ### Remove a user by email address
 DELETE http://lab-infra.dev/api/auth?email=test@test.com
