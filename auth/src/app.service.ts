@@ -1,27 +1,33 @@
 import { Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm'
+import { v4 as uuidv4 } from 'uuid';
 import { User } from './entities/user.entity'
 
   @Injectable()
   export class AppService {
   constructor(@InjectRepository(User) private repo: Repository<User>) {}
   create(email: string, password: string) {
+    const userId = uuidv4()
     // The 'instance' of the user needs to be created first before
     // saving off to the DB.  There are hooks attached to the entity
     // that will not run if the entity is not created first
-    const user = this.repo.create({ email, password })
+    const user = this.repo.create({ email, password, userId })
     // Using AfterInsert() in Entity class
     //console.log(`Creating user:  email=${email}, password=${password}`)
     return this.repo.save(user)
   }
-  findOne(id: number) {
-    return this.repo.findOneBy({ id });
+  findOne(id: string) {
+    return this.repo.findOne({
+      where: {
+        userId: id
+      }
+     });
   }
   find(email: string) {
       return this.repo.find({ where: { email } })
   }
-  async update(id: number, attrs: Partial<User>) {
+  async update(id: string, attrs: Partial<User>) {
     const user = await this.findOne(id);
     if (!user) {
       throw new Error('user does not exist');
@@ -29,10 +35,17 @@ import { User } from './entities/user.entity'
     Object.assign(user, attrs);
     return this.repo.save(user);
   }
-  //async remove(id: number) {
-  //  const user = await this.repo.findOne(parseInt(id))
-  //  return this.repo.remove(user)
-  //}
+  async remove(email: string) {
+    const user = await this.repo.findOne({
+      where: {
+        email: email
+      }
+    })
+    if (!user) {
+      throw new Error('User with that email address not found.')
+    }
+    return this.repo.remove(user)
+  }
   getHello(): string {
     return 'Hello';
   }

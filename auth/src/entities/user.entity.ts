@@ -4,7 +4,10 @@ import { Entity, Column, AfterInsert, AfterRemove, AfterUpdate, ObjectIdColumn }
 export class User {
     // Mongo needs ObjectIdColumn instead of PrimaryGeneratedColumn
     @ObjectIdColumn()
-    id: number;
+    _id: number;
+
+    @Column()
+    userId: string;
 
     @Column()
     email: string;
@@ -14,16 +17,16 @@ export class User {
 
     @AfterInsert()
     logInsert() {
-        console.log('Created user with ID: ', this.id)
+        console.log('Created user with ID: ', this.userId)
     }
 
     @AfterUpdate()
     logUpdate() {
-        console.log('Updated user with ID: ', this.id)
+        console.log('Updated user with ID: ', this.userId)
     }
 
     @AfterRemove()
     logRemove() {
-        console.log('Removed user with ID: ', this.id)
+        console.log('Removed user with ID: ', this.userId)
     }
 }

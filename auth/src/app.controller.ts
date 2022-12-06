@@ -6,21 +6,22 @@ import { userSignupDTO } from "./dto/userSignup.dto";
 export class AppController {
   constructor(private appService: AppService) {}
 
+
   @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  findAllUsers(@Query('email') email: string) {
+    return this.appService.find(email)
   }
 
   // request doesn't fail, but doesn't return anything
   @Get('user/:id')
   findUser(@Param('id') id: string ) {
-    return this.appService.findOne(parseInt(id));
+    return this.appService.findOne(id);
   }
 
-  //@Delete('user/:id') 
-  //removeUser(@Param('id') id: string ) {
-  //  return this.appService.remove(parseInt(id))
-  //}
+  @Delete() 
+  removeUser(@Query('email') email: string ) {
+    return this.appService.remove(email)
+  }
 
   @Post('signup')
   createUser(@Body() body: userSignupDTO) {
