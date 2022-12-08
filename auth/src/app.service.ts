@@ -27,8 +27,8 @@ import { User } from './entities/user.entity'
   find(email: string) {
       return this.repo.find({ where: { email } })
   }
-  async update(id: string, attrs: Partial<User>) {
-    const user = await this.findOne(id);
+  async update(userId: string, attrs: Partial<User>) {
+    const user = await this.findOne(userId);
     if (!user) {
       throw new NotFoundException('user does not exist');
     }

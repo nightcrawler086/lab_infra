@@ -1,6 +1,7 @@
 import { Controller, Get, Post, Request, Body, Patch, Param, Query, Delete, NotFoundException } from '@nestjs/common';
 import { AppService } from './app.service';
 import { userSignupDTO } from "./dto/userSignup.dto";
+import { UpdateUserDTO } from './dto/user-update.dto';
 
 @Controller('api/auth')
 export class AppController {
@@ -47,5 +48,10 @@ export class AppController {
   @Post('signout')
   userSignout(): string {
     return this.appService.userSignout();
+  }
+
+  @Patch('/user/:id')
+  updateUser(@Param('id') userId: string, @Body() body: UpdateUserDTO) {
+    return this.appService.update(userId, body)
   }
 }
